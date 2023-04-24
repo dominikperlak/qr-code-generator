@@ -19,7 +19,10 @@ body {
 h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: #fff;
+  font-family: Arial, sans-serif;
 }
+
 
 input {
   appearance:  none;
@@ -40,11 +43,11 @@ button, a {
   background: none;
   cursor: pointer;
   color: #0614da;
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   line-height: 1;
   text-decoration: none;
- 
 }
+
 
 img {
   display: block;
