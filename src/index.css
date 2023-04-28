@@ -12,9 +12,8 @@ body {
 }
 
 .app {
-  padding: 2rem 1 rem;
+  padding: 2rem 1rem;
 }
-
 
 h1 {
   font-size: 2.5rem;
@@ -23,9 +22,8 @@ h1 {
   font-family: Arial, sans-serif;
 }
 
-
 input {
-  appearance:  none;
+  appearance: none;
   outline: none;
   border: none;
   background: #eee;
@@ -34,6 +32,7 @@ input {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   margin-right: 1rem;
+  color: #1b2034;
 }
 
 button, a {
@@ -42,12 +41,20 @@ button, a {
   border: none;
   background: none;
   cursor: pointer;
-  color: #0614da;
+  color: #fff;
   font-size: 1.65rem;
   line-height: 1;
   text-decoration: none;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
 }
 
+button:hover, a:hover {
+  background-color: #fff;
+  color: #1b2034;
+}
 
 img {
   display: block;

@@ -1,21 +1,25 @@
-import QRCode from 'qrcode'
-import { useState } from 'react'
-import { Button, Input } from 'antd'
-import 'antd/dist/antd'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import React, { useState } from 'react';
+import { Button, Input } from 'antd';
+import QRCode from 'qrcode';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './index.css';
 
 function App() {
-  const [url, setUrl] = useState('')
-  const [qr, setQr] = useState('')
+  const [inputValue, setInputValue] = useState('');
+  const [qrCode, setQrCode] = useState(null);
 
-  const GenerateQRCode = () => {
-    if (url.trim() === '') {
-      toast.error('Missing text!')
-      return
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  }
+
+  const handleGenerateButtonClick = () => {
+    if (inputValue.trim() === '') {
+      toast.error('Missing text!');
+      return;
     }
 
-    QRCode.toDataURL(url, {
+    QRCode.toDataURL(inputValue, {
       width: 800,
       margin: 2,
       color: {
@@ -24,33 +28,38 @@ function App() {
       }
     }, (err, url) => {
       if (err) {
-        console.error(err)
-        toast.error('Missing task.')
-        return
+        console.error(err);
+        toast.error('Error generating QR code.');
+        return;
       }
 
-      console.log(url)
-      setQr(url)
-      toast.success('QR Code has been generated succesfully!')
-    })
+      setQrCode(url);
+      toast.success('QR code generated successfully!');
+    });
+  }
+
+  const handleDownloadButtonClick = () => {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = qrCode;
+    downloadLink.download = 'qr-code.png';
+    downloadLink.click();
   }
 
   return (
     <div className="app">
-      <h1>QR Generator</h1>
-      <Input
-        placeholder="np. https://google.com"
-        value={url}
-        onChange={e => setUrl(e.target.value)}
-        style={{ maxWidth: '300px', marginRight: '1rem' }}
-      />
-      <Button type="primary" onClick={GenerateQRCode}>Generate</Button>
-      {qr && <>
-        <img src={qr} alt="QR Code" style={{ display: 'block', maxWidth: '480px', margin: '2rem auto' }} />
-        <Button type="link" href={qr} download="qrcode.png">Download</Button>
-      </>}
+      <h1>QR Code Generator</h1>
+      <div className="input-container">
+        <Input className="text-input" placeholder="Enter text" value={inputValue} onChange={handleInputChange} />
+        <Button className="generate-button" type="primary" onClick={handleGenerateButtonClick}>Generate</Button>
+      </div>
+      {qrCode && (
+        <div className="qr-code-container">
+          <img className="qr-code" src={qrCode} alt="QR code" />
+          <Button className="download-button" type="primary" onClick={handleDownloadButtonClick}>Download QR Code</Button>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
