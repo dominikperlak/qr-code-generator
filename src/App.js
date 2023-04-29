@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 
-function App() {
+const App = () => {
   const [inputValue, setInputValue] = useState('');
   const [qrCode, setQrCode] = useState(null);
 
